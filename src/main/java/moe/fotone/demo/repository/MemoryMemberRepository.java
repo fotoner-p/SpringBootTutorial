@@ -1,13 +1,14 @@
 package moe.fotone.demo.repository;
 
 import moe.fotone.demo.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 public class MemoryMemberRepository implements MemberRepository{
 
-    private static Map<Long, Member> store = new HashMap<>();
-    private static long sequence = 0L;
+    private Map<Long, Member> store = new HashMap<>();
+    private long sequence = 0L;
 
     @Override
     public Member save(Member member) {
@@ -32,5 +33,9 @@ public class MemoryMemberRepository implements MemberRepository{
     @Override
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    public void clearStore() {
+        store.clear();
     }
 }
